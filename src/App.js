@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import Navs from './components/Navbar_home';
+import Cars from './components/Carousel_home';
+import Card from './components/Card_home';
+import Features from './components/FeaturesCardGroup_home';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
+import { Routes, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+function LandingPage() {
+  return (
+    <>
+      {/* < Navs />
+      < Cars />
+      < Card />
+      < Features /> */}
+
+
+    </>
+  );
+}
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <Login /> */}
+      <Registration />
+
+    </>
+
   );
 }
 
