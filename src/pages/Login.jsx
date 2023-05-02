@@ -14,6 +14,7 @@ function LoginPage() {
 
         <>
             <Container fluid style={{ padding: 0, overflowX: 'hidden', backgroundColor: 'black', color: 'white' }}>
+            {/*NAVIGATION BAR DISPLAY */}
             <NavBar />
                 <Row noGutters>
                     <Col>
@@ -51,6 +52,7 @@ function LoginPage() {
                         </Form>
                     </Col>
                 </Row>
+                {/*FOOTER DISPLAY */}
                 <FooterDisplay/>
             </Container>
         </>
