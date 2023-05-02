@@ -1,49 +1,61 @@
-import { Navbar, Container, Button, Form, Card, CardGroup } from 'react-bootstrap';
+import { Navbar, Container, Button, Form, Card, Row, Col } from 'react-bootstrap';
 import NavBar from '../components/Navbar_home';
+import FooterDisplay from '../components/FooterDisplay';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-
-function BasicExample() {
+function LoginPage() {
+    const [email, setEmail] = useState("");
+    const formGroups = [
+        { controlId: "formBasicEmail", label: "Email address", type: "email", placeholder: "Enter email" },
+        { controlId: "formBasicPassword", label: "Password", type: "password", placeholder: "Enter password" }
+    ];
     return (
+
         <>
+            <Container fluid style={{ padding: 0, overflowX: 'hidden', backgroundColor: 'black', color: 'white' }}>
             <NavBar />
+                <Row noGutters>
+                    <Col>
+                        <Card style={{ border: '0' }}>
+                            <Card.Img variant="top" src="https://i.nextmedia.com.au/News/20190927100215_LR1_7389.jpg" style={{ height: '650px' }} className='rounded-0' />
+                        </Card>
+                    </Col>
 
-            <div>
-                     
-                <Form style={{ position: 'relative', top: '50%', left: '50%', transform: 'translate(-50%, 70%)' }}>
-                    <h3 className='text-center'>Sign In</h3>
 
-                    <Form.Group className="mx-5 d-flex justify-content-center align-items-center" controlId="formBasicUserName">
-                        <Form.Label className='p-3'>User Name</Form.Label>
-                        <Form.Control style={{ width: '25%' }} type="text" placeholder="Enter user name" />
-                    </Form.Group>
+                    <Col style={{paddingLeft: '50px', paddingRight: '50px', paddingTop: '100px'}}>
+                        <Form>
+                            <h3 className='mb-5 text-center'>Welcome Back</h3>
 
-                    <Form.Group className="mx-5 d-flex justify-content-center align-items-center" controlId="formBasicPassword">
-                        <Form.Label className='p-4'>Password</Form.Label>
-                        <Form.Control style={{ width: '25%' }} type="password" placeholder="Password" />
-                    </Form.Group>
+                            {formGroups.map((group) => (
+                                <Form.Group className="mb-3" controlId={group.controlId} key={group.controlId}>
+                                    <Form.Label>{group.label}</Form.Label>
+                                    <Form.Control type={group.type} placeholder={group.placeholder} onChange={(e) => setEmail(e.target.value)} value={email} />
+                                </Form.Group>
+                            ))}
+                            
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                                <Form.Check type="checkbox" label="Remember me" />
+                            </Form.Group>
 
-                    <Form.Group>
 
-                        <Button style={{ width: '20%', position: 'relative', top: '50%', left: '51%', transform: 'translate(-50%, 50%)' }} variant="primary" type="submit">
-                            Login
-                        </Button>
-                    </Form.Group>
-                </Form>
 
-          
+                            <Button href="/" variant="primary" type="submit" className='w-100'>
+                                Sign In
+                            </Button>
 
-                <Navbar bg="dark" variant="dark" fixed="bottom">
-                    <Container>
-                        <Navbar.Text className='mx-auto text-center'>
-                            <h5>MERIDA. MORE BIKE.</h5>
-                            <p> &copy; 2023 MERIDA BIKES. All rights reserved.</p>
-                        </Navbar.Text>
-                    </Container>
-                </Navbar>
-            </div>
+                            <Link to="/Registration"><p className='mt-3 text-center'>Don't have an account? Sign up.</p></Link>
 
+                            <h4>Email is: {email}</h4>
+
+                        </Form>
+                    </Col>
+                </Row>
+                <FooterDisplay/>
+            </Container>
         </>
+
     );
 }
 
-export default BasicExample;
+export default LoginPage;
