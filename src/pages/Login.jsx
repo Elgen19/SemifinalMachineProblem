@@ -1,15 +1,25 @@
-import { Navbar, Container, Button, Form, Card, Row, Col } from 'react-bootstrap';
+import { Container, Button, Form, Card, Row, Col } from 'react-bootstrap';
 import NavBar from '../components/Navbar_home';
 import FooterDisplay from '../components/FooterDisplay';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 
+
 function LoginPage() {
-    const [email, setEmail] = useState("");
+    const relocateTo = useNavigate();
+    const [email, setEmail] = useState(localStorage.getItem("email") ||"");
+    const [password, setPassword] = useState("");
     const formGroups = [
-        { controlId: "formBasicEmail", label: "Email address", type: "email", placeholder: "Enter email" },
-        { controlId: "formBasicPassword", label: "Password", type: "password", placeholder: "Enter password" }
+        { controlId: "formBasicEmail", label: "Email address", type: "email", placeholder: "Enter email" , onchange: (e) => setEmail(e.target.value)},
+        { controlId: "formBasicPassword", label: "Password", type: "password", placeholder: "Enter password", onchange: (e) => setPassword(e.target.value) }
     ];
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+        relocateTo('/');
+      };
     return (
 
         <>
@@ -24,14 +34,14 @@ function LoginPage() {
                     </Col>
 
 
-                    <Col style={{paddingLeft: '50px', paddingRight: '50px', paddingTop: '100px'}}>
+                    <Col style = {{paddingLeft: '50px', paddingRight: '50px', paddingTop: '100px'}}>
                         <Form>
                             <h3 className='mb-5 text-center'>Welcome Back</h3>
 
                             {formGroups.map((group) => (
                                 <Form.Group className="mb-3" controlId={group.controlId} key={group.controlId}>
                                     <Form.Label>{group.label}</Form.Label>
-                                    <Form.Control type={group.type} placeholder={group.placeholder} onChange={(e) => setEmail(e.target.value)} value={email} />
+                                    <Form.Control type={group.type} placeholder={group.placeholder} onChange= {group.onchange} />
                                 </Form.Group>
                             ))}
                             
@@ -41,13 +51,14 @@ function LoginPage() {
 
 
 
-                            <Button href="/" variant="primary" type="submit" className='w-100'>
+                            <Button variant="primary" type="submit" className='w-100' onClick={handleSubmit}>
                                 Sign In
                             </Button>
 
                             <Link to="/Registration"><p className='mt-3 text-center'>Don't have an account? Sign up.</p></Link>
 
-                            <h4>Email is: {email}</h4>
+                            <h5>Email is: {email}</h5>
+                            <h5>Password is: {password}</h5>
 
                         </Form>
                     </Col>
